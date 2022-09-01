@@ -23,4 +23,9 @@ class ProductController extends Controller
         $product->save();
         return response()->json($product);
     }
+    public function show($id)
+    {
+        $product = Product::find($id);
+        return response()->json($product);
+    }
 }
