@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\ProductController;
+
 /** @var \Laravel\Lumen\Routing\Router $router */
 
 /*
@@ -13,6 +15,18 @@
 |
 */
 
-$router->get('/', function () use ($router) {
-    return $router->app->version();
+//$router->get('/', function () use ($router) {
+//    return $router->app->version();
+//});
+
+$router->group(['prefix'=>'api/v1'], function () use($router) {
+    $router->get('/products', [ProductController::class, 'index']);
+
+    $router->post('/product', [ProductController::class, 'create']);
+
+    $router->get('/product/{id}', [ProductController::class, 'show']);
+
+    $router->put('/product/{id}', [ProductController::class, 'update']);
+
+    $router->delete('/product/{id}', [ProductController::class, 'destroy']);
 });
